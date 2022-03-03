@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleResource extends JsonResource
 {
@@ -22,7 +23,7 @@ class ArticleResource extends JsonResource
             'description'    => $this->description,
             'views'          => $this->views,
             'published_date' => $this->created_at->format('d-m-Y'),
-            'image'          => $this->image ? url($this->image) : null,
+            'image'          => $this->image ? asset('storage/uploads/articles/' . $this->image) : null,
             'category'       => new CategoryResource($this->whenLoaded('category')),
         ];
     }
